@@ -9,6 +9,7 @@ import Usuario from "./pages/Usuario/usuario";
 import UsuarioLayout from "./pages/Usuario/usuario_layout";
 import MoradiaDetalhes from "./pages/MoradiaDetalhes/moradiaDetalhes";
 import Ajuda from "./pages/Ajuda/ajuda";
+import Favoritos from "./pages/Favoritos/favoritos";
 
 function RoutesApp() {
 
@@ -27,6 +28,7 @@ function RoutesApp() {
                     <Route path="/formulario" element={<Formulario />} />
                     <Route path="/moradia" element={<Moradia />} />
                     <Route path="/moradia/:id" element={<MoradiaDetalhes />} />
+                    <Route path="/favoritos" element={<Favoritos />} />
                     <Route path="/usuario_layout" element={<UsuarioLayout />} />
                     <Route path="/ajuda" element={<Ajuda />} />
                 </Route>

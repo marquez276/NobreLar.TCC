@@ -130,6 +130,15 @@
   transform: translateY(-2px);
 }
 
+.btn-favoritar.favorito-ativo {
+  background: #ff4757;
+  color: white;
+}
+
+.btn-favoritar.favorito-ativo:hover {
+  background: #ff3742;
+}
+
 .loading {
   text-align: center;
   padding: 50px;

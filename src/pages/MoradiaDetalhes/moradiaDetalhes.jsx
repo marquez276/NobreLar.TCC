@@ -7,17 +7,37 @@ function MoradiaDetalhes() {
     const { id } = useParams()
     const navigate = useNavigate()
     const [moradia, setMoradia] = useState(null)
+    const [isFavorito, setIsFavorito] = useState(false)
 
     useEffect(() => {
         api.get(`http://localhost:3001/moradia/${id}`)
             .then((response) => {
                 setMoradia(response.data)
+                // Verifica se já está nos favoritos
+                const favoritos = JSON.parse(localStorage.getItem('favoritos') || '[]')
+                setIsFavorito(favoritos.some(fav => fav.id === id))
             })
             .catch(err => {
                 console.error("Erro ao buscar moradia:", err)
                 navigate('/home')
             })
     }, [id, navigate])
+
+    const toggleFavorito = () => {
+        const favoritos = JSON.parse(localStorage.getItem('favoritos') || '[]')
+        
+        if (isFavorito) {
+            // Remove dos favoritos
+            const novosFavoritos = favoritos.filter(fav => fav.id !== id)
+            localStorage.setItem('favoritos', JSON.stringify(novosFavoritos))
+            setIsFavorito(false)
+        } else {
+            // Adiciona aos favoritos
+            const novosFavoritos = [...favoritos, moradia]
+            localStorage.setItem('favoritos', JSON.stringify(novosFavoritos))
+            setIsFavorito(true)
+        }
+    }
 
     if (!moradia) {
         return <div className="loading">Carregando...</div>
@@ -64,7 +84,12 @@ function MoradiaDetalhes() {
                     
                     <div className="acoes">
                         <button className="btn-contato">Entrar em Contato</button>
-                        <button className="btn-favoritar">❤️ Favoritar</button>
+                        <button 
+                            className={`btn-favoritar ${isFavorito ? 'favorito-ativo' : ''}`}
+                            onClick={toggleFavorito}
+                        >
+                            {isFavorito ? '❤️ Favoritado' : '🤍 Favoritar'}
+                        </button>
                     </div>
                 </div>
             </div>

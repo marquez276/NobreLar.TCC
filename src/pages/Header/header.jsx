@@ -32,6 +32,10 @@ function Header() {
 
                     <span className='separador'>|</span>
 
+                    <a href="/favoritos" className="abas">Favoritos</a>
+
+                    <span className='separador'>|</span>
+
                     <a href="/usuario_layout" className="abas">Perfil</a>
 
                     <span className='separador'>|</span>
