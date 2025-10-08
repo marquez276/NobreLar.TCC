@@ -1,0 +1,33 @@
+.sem-favoritos {
+  text-align: center;
+  padding: 60px 20px;
+  color: #ffffff;
+}
+
+.sem-favoritos p {
+  font-size: 18px;
+  margin: 10px 0;
+}
+
+.acoes-favorito {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.btn-remover-favorito {
+  background: #ff4757;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 15px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-remover-favorito:hover {
+  background: #ff3742;
+  transform: scale(1.05);
+}
