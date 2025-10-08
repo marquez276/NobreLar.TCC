@@ -1,0 +1,74 @@
+/* Header */
+header {
+  font-family: Helvetica, Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  height: 120px;
+  background-color: #000000;
+  color: rgb(255, 255, 255);
+  border-bottom: 5px solid #000000;
+  position: relative;
+}
+
+/* Menu de navegação */
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.abas {
+  text-decoration: none;
+  font-size: 20px;
+  color: rgb(253, 253, 253);
+  padding: 0 15px;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.abas:hover {
+  color: #999999;
+}
+
+/* Separador */
+.separador {
+  color: rgb(121, 121, 121);
+  font-size: 22px;
+}
+
+/* Logo ou imagem */
+img {
+  height: 80px;
+  margin-bottom: 10px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Foto de perfil do usuário */
+.user-profile {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.profile-pic {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #ffd700;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  margin: 0;
+}
+
+.profile-pic:hover {
+  transform: scale(1.1);
+  border-color: #ffb347;
+  box-shadow: 0 6px 12px rgba(255, 215, 0, 0.4);
+}

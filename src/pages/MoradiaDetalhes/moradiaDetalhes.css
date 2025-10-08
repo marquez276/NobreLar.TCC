@@ -1,0 +1,149 @@
+.detalhes-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.btn-voltar {
+  background: #495057;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+
+.btn-voltar:hover {
+  background: #343a40;
+}
+
+.moradia-detalhes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  background: white;
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+.imagem-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.imagem-principal {
+  width: 100%;
+  height: auto;
+  max-height: 500px;
+  object-fit: contain;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  background: #f8f9fa;
+}
+
+.info-container h1 {
+  color: #212529;
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+
+.preco-tipo {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.preco {
+  font-size: 28px;
+  font-weight: 700;
+  color: #ffd700;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.tipo {
+  background: #495057;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: 600;
+}
+
+.localizacao, .descricao, .contato {
+  margin-bottom: 25px;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 12px;
+  border-left: 4px solid #ffd700;
+}
+
+.localizacao h3, .descricao h3, .contato h3 {
+  color: #495057;
+  margin-bottom: 15px;
+  font-size: 20px;
+}
+
+.localizacao p, .descricao p, .contato p {
+  margin: 8px 0;
+  color: #6c757d;
+  line-height: 1.6;
+}
+
+.acoes {
+  display: flex;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+.btn-contato, .btn-favoritar {
+  flex: 1;
+  padding: 15px;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-contato {
+  background: #ffd700;
+  color: #000;
+}
+
+.btn-contato:hover {
+  background: #ffb347;
+  transform: translateY(-2px);
+}
+
+.btn-favoritar {
+  background: #495057;
+  color: white;
+}
+
+.btn-favoritar:hover {
+  background: #343a40;
+  transform: translateY(-2px);
+}
+
+.loading {
+  text-align: center;
+  padding: 50px;
+  font-size: 18px;
+  color: #6c757d;
+}
+
+@media (max-width: 768px) {
+  .moradia-detalhes {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .acoes {
+    flex-direction: column;
+  }
+}
