@@ -12,14 +12,13 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";//aqui
 import './login.css'
+import { useAuth } from '../../context/AuthContext'
 
 const Login = () => {
-
-
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
     const [message, setMessage] = useState("");
-
+    const { login } = useAuth()
     const navigate = useNavigate();
 
     const handlelogin = async (e) => {
@@ -30,8 +29,9 @@ const Login = () => {
             const data = await response.json();
 
             if (data.length > 0) {
+                const userData = data[0]
+                login(userData)
                 setMessage("Login realizado com sucesso!");
-                //Redireciona para a Home
                 navigate("/home");
             } else {
                 setMessage("Email ou senha inválidos.");

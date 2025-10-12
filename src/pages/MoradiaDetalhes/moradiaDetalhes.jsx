@@ -2,12 +2,14 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import api from 'axios'
 import './moradiaDetalhes.css'
+import { useAuth } from '../../context/AuthContext'
 
 function MoradiaDetalhes() {
     const { id } = useParams()
     const navigate = useNavigate()
     const [moradia, setMoradia] = useState(null)
     const [isFavorito, setIsFavorito] = useState(false)
+    const { isAuthenticated } = useAuth()
 
     useEffect(() => {
         api.get(`http://localhost:3001/moradia/${id}`)
@@ -24,15 +26,19 @@ function MoradiaDetalhes() {
     }, [id, navigate])
 
     const toggleFavorito = () => {
+        if (!isAuthenticated) {
+            alert('Você precisa fazer login para favoritar!')
+            navigate('/login')
+            return
+        }
+        
         const favoritos = JSON.parse(localStorage.getItem('favoritos') || '[]')
         
         if (isFavorito) {
-            // Remove dos favoritos
             const novosFavoritos = favoritos.filter(fav => fav.id !== id)
             localStorage.setItem('favoritos', JSON.stringify(novosFavoritos))
             setIsFavorito(false)
         } else {
-            // Adiciona aos favoritos
             const novosFavoritos = [...favoritos, moradia]
             localStorage.setItem('favoritos', JSON.stringify(novosFavoritos))
             setIsFavorito(true)

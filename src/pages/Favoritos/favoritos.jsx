@@ -1,13 +1,19 @@
 import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import './favoritos.css'
+import { useAuth } from '../../context/AuthContext'
 
 function Favoritos() {
     const [favoritos, setFavoritos] = useState([])
+    const { isAuthenticated } = useAuth()
+    const navigate = useNavigate()
 
     useEffect(() => {
-        const favoritosSalvos = JSON.parse(localStorage.getItem('favoritos') || '[]')
-        setFavoritos(favoritosSalvos)
-    }, [])
+        if (isAuthenticated) {
+            const favoritosSalvos = JSON.parse(localStorage.getItem('favoritos') || '[]')
+            setFavoritos(favoritosSalvos)
+        }
+    }, [isAuthenticated])
 
     const removerFavorito = (id) => {
         const novosFavoritos = favoritos.filter(fav => fav.id !== id)
@@ -21,7 +27,11 @@ function Favoritos() {
                 Meus Favoritos
             </div>
 
-            {favoritos.length === 0 ? (
+            {!isAuthenticated ? (
+                <div className="sem-login">
+                    <p>Você não está logado, caso não tem um login, aperte no ícone do boneco acima e cadastre-se</p>
+                </div>
+            ) : favoritos.length === 0 ? (
                 <div className="sem-favoritos">
                     <p>Você ainda não tem favoritos.</p>
                     <p>Navegue pelas moradias e clique em "Favoritar" para salvá-las aqui!</p>

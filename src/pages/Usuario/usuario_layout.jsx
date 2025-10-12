@@ -1,19 +1,25 @@
 import api from "axios";
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from '../../context/AuthContext';
 import './usuario_layout.css'
 
 function UsuarioLayout() {
+     const { user, isAuthenticated } = useAuth()
+     const navigate = useNavigate()
 
-     const [vusuario, setUsuario] = useState([])
-
-     useEffect(() => {
-          api.get("http://localhost:3001/usuario")
-               .then((response) => {
-                    setUsuario(response.data)
-                    console.log(response.data)
-               })
-               .catch(err => console.error("Erro ao Buscar os dados", err))
-     }, []);
+     if (!isAuthenticated || !user) {
+          return (
+               <div className='app-container'>
+                    <div className="main-content">
+                         Perfil do Usuário
+                    </div>
+                    <div className="sem-login">
+                         <p>Você não está logado, caso não tem um login, aperte no ícone do boneco acima e cadastre-se</p>
+                    </div>
+               </div>
+          )
+     }
 
 
 
@@ -33,23 +39,17 @@ function UsuarioLayout() {
 
 
 <div className="cards-container">
-                {vusuario.length > 0 ? (
-                    vusuario.map((usuario) => (
-                        <div key={usuario.id} className="produto-card">
-                            {usuario.foto ? (
-                                <img src={usuario.foto} alt={usuario.nome} className="produto-imagem" />
-                            ) : (
-                                <img src="caminho/para/imagem-padrao.png" alt="Imagem não disponível" className="produto-imagem" />
-                            )}
-                            <p>{usuario.nome}</p>
-                            <p>{usuario.email}</p>
-                            <p>{usuario.senha}</p>
-                            <p>{usuario.status}</p>
-                        </div>
-                    ))
-                ) : (
-                    <p>Nenhum usuário encontrado.</p>
-                )}
+                <div className="produto-card">
+                    {user.foto ? (
+                        <img src={user.foto} alt={user.nome} className="produto-imagem" />
+                    ) : (
+                        <div className="sem-foto">📷</div>
+                    )}
+                    <h3>{user.nome}</h3>
+                    <p><strong>Email:</strong> {user.email}</p>
+                    <p><strong>Senha:</strong> {user.senha}</p>
+                    <p><strong>Status:</strong> {user.status || 'Ativo'}</p>
+                </div>
             </div>
         </div>
     );

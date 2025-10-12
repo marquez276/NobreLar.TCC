@@ -11,11 +11,14 @@
 
 import api from "axios";
 import './moradia.css'
+import { useNavigate } from "react-router-dom";
+import { useAuth } from '../../context/AuthContext';
 
 import React, { useState, useEffect } from "react";
 
 const Moradia = () => {
-
+     const { isAuthenticated } = useAuth()
+     const navigate = useNavigate()
      const [vmoradia, setMoradia] = useState([])
 
      // ==================== CAMPOS DO FORMULÁRIO ====================
@@ -48,6 +51,12 @@ const Moradia = () => {
      // ==================== CADASTRAR OU ATUALIZAR MORADIA ====================
      const handleSubmit = async (e) => {
           e.preventDefault();
+          
+          if (!isAuthenticated) {
+               alert('Você precisa fazer login para cadastrar moradias!')
+               navigate('/login')
+               return
+          }
 
           const dataToSend = {
                nomedacidade: vNomeC,

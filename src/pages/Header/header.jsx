@@ -3,20 +3,11 @@ import Logo from '../img/Logo.png'
 import './header.css'
 import { useState, useEffect } from 'react'
 import api from 'axios'
+import { useAuth } from '../../context/AuthContext'
 
 function Header() {
-    const [usuario, setUsuario] = useState(null)
-
-    useEffect(() => {
-        // Busca o primeiro usuário (você pode modificar para buscar o usuário logado)
-        api.get("http://localhost:3001/usuario")
-            .then((response) => {
-                if (response.data.length > 0) {
-                    setUsuario(response.data[0]) // Pega o primeiro usuário
-                }
-            })
-            .catch(err => console.error("Erro ao buscar usuário:", err))
-    }, [])
+    const { user, isAuthenticated, logout } = useAuth()
+    const [showDropdown, setShowDropdown] = useState(false)
 
     return (
         <header>
@@ -44,16 +35,44 @@ function Header() {
 
                 </nav>
                 
-                {usuario && usuario.foto && (
-                    <div className="user-profile">
-                        <img 
-                            src={usuario.foto} 
-                            alt={usuario.nome} 
-                            className="profile-pic"
-                            title={usuario.nome}
-                        />
+                <div className="user-profile">
+                    <div 
+                        className="profile-container"
+                        onClick={() => setShowDropdown(!showDropdown)}
+                    >
+                        {user && user.foto ? (
+                            <img 
+                                src={user.foto} 
+                                alt={user.nome} 
+                                className="profile-pic"
+                            />
+                        ) : (
+                            <div className="profile-icon">👤</div>
+                        )}
+                        
+                        {showDropdown && (
+                            <div className="dropdown-menu">
+                                {isAuthenticated ? (
+                                    <>
+                                        <span className="user-name">{user?.nome}</span>
+                                        <button onClick={logout} className="dropdown-item">
+                                            Sair da conta
+                                        </button>
+                                    </>
+                                ) : (
+                                    <>
+                                        <Link to="/login" className="dropdown-item">
+                                            Fazer Login
+                                        </Link>
+                                        <Link to="/usuario" className="dropdown-item">
+                                            Cadastrar
+                                        </Link>
+                                    </>
+                                )}
+                            </div>
+                        )}
                     </div>
-                )}
+                </div>
             </div>
         </header>
     );

@@ -31,3 +31,19 @@
   background: #ff3742;
   transform: scale(1.05);
 }
+
+.sem-login {
+  text-align: center;
+  padding: 40px 20px;
+  background: #f8f9fa;
+  border-radius: 12px;
+  margin: 20px;
+}
+
+.sem-login p {
+  font-size: 18px;
+  color: #495057;
+  line-height: 1.6;
+  margin: 0;
+  font-weight: 500;
+}

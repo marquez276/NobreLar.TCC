@@ -82,3 +82,31 @@
   color: #ffffff;
   box-shadow: 0 4px 8px rgba(40, 167, 69, 0.3);
 }
+
+.sem-foto {
+  width: 100%;
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f8f9fa;
+  border-radius: 4px;
+  font-size: 48px;
+  color: #6c757d;
+}
+
+.sem-login {
+  text-align: center;
+  padding: 40px 20px;
+  background: #f8f9fa;
+  border-radius: 12px;
+  margin: 20px;
+}
+
+.sem-login p {
+  font-size: 18px;
+  color: #495057;
+  line-height: 1.6;
+  margin: 0;
+  font-weight: 500;
+}
