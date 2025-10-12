@@ -132,3 +132,92 @@ img {
 .dropdown-item:hover {
   background: #f8f9fa;
 }
+
+/* =============================================
+   RESPONSIVIDADE - MEDIA QUERIES
+   ============================================= */
+
+/* Tablet */
+@media (max-width: 768px) {
+  header {
+    height: auto;
+    padding: 15px 10px;
+  }
+  
+  nav {
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+  
+  .abas {
+    font-size: 16px;
+    padding: 0 8px;
+  }
+  
+  .separador {
+    font-size: 18px;
+  }
+  
+  img {
+    height: 60px;
+  }
+  
+  .user-profile {
+    top: 10px;
+    right: 10px;
+  }
+  
+  .profile-pic,
+  .profile-icon {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  header {
+    height: auto;
+    padding: 10px 5px;
+  }
+  
+  nav {
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 15px;
+  }
+  
+  .abas {
+    font-size: 14px;
+    padding: 8px 12px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    margin: 2px;
+  }
+  
+  .separador {
+    display: none;
+  }
+  
+  img {
+    height: 50px;
+    margin-bottom: 5px;
+  }
+  
+  .user-profile {
+    top: 5px;
+    right: 5px;
+  }
+  
+  .profile-pic,
+  .profile-icon {
+    width: 35px;
+    height: 35px;
+    font-size: 18px;
+  }
+  
+  .dropdown-menu {
+    right: -10px;
+    min-width: 120px;
+  }
+}

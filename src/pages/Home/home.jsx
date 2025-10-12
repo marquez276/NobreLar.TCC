@@ -1,26 +1,47 @@
-import { Link } from 'react-router-dom'
-import Casa from '../img/teste1.jpg'
+
 import './home.css'
 
-import api from "axios";
+import api from "../../services/api";
+import { useAuth } from '../../context/AuthContext';
 import React, { useState, useEffect } from "react";
 
 function Home() {
 
-   
-
-     {/*Parte moradia*/ }
-
-     const [vmoradia, setMoradia] = useState([])
+     const [vimoveis, setImoveis] = useState([])
+     const { isAuthenticated, user } = useAuth()
 
      useEffect(() => {
-          api.get("http://localhost:3001/moradia")
+          api.get("/imoveis")
                .then((response) => {
-                    setMoradia(response.data)
-                    console.log(response.data)
+                    setImoveis(response.data)
                })
-               .catch(err => console.error("Erro ao Buscar os dados", err))
+               .catch(err => console.error("Erro ao Buscar os imóveis", err))
      }, []);
+
+     const adicionarFavorito = async (imovel) => {
+          if (!isAuthenticated || !user?.idUsuario) {
+               alert('Faça login para adicionar favoritos!')
+               return
+          }
+
+          const favoritoData = {
+               idUsuario: user.idUsuario,
+               idImovel: imovel.idMovel,
+               dataAdicao: new Date().toISOString().split('T')[0],
+               nomeImovel: imovel.nome,
+               valorImovel: imovel.valor,
+               cidadeImovel: imovel.cidade,
+               imagemImovel: imovel.imagem
+          }
+
+          try {
+               await api.post('/favoritos', favoritoData)
+               alert('Imóvel adicionado aos favoritos!')
+          } catch (err) {
+               console.error('Erro ao adicionar favorito', err)
+               alert('Erro ao adicionar favorito')
+          }
+     }
 
 
 
@@ -40,26 +61,32 @@ function Home() {
                </div>
 
 <div className="cards-container">
-     {vmoradia.map((moradia) => (
-<div key={moradia.id} className="produto-card" onClick={() => window.location.href = `/moradia/${moradia.id}`} style={{cursor: 'pointer'}}>
-     {moradia.imagem && (
-          <img src={moradia.imagem} alt={moradia.nome} className="produto-imagem" />
-     )}
-     <h3>{moradia.nome}</h3>
-     <p>R$ {moradia.preco} - {moradia.tipoNegocio || 'Venda'}</p>
-     <p>{moradia.nomedacidade}</p>
-     <p>{moradia.bairro}</p>
-     <p>{moradia.descricao}</p>
-     <div className="ver-detalhes">Clique para ver detalhes</div>
-</div>
-
-
-
-
-
-
+     {vimoveis.map((imovel) => (
+          <div key={imovel.idMovel} className="produto-card">
+               {imovel.imagem && (
+                    <img src={imovel.imagem} alt={imovel.nome} className="produto-imagem" />
+               )}
+               <h3>{imovel.nome}</h3>
+               <p>R$ {imovel.valor} - {imovel.tipoNegocio}</p>
+               <p>{imovel.cidade} - {imovel.bairro}</p>
+               <p>{imovel.descricao}</p>
+               <p>Proprietário: {imovel.nomeProprietario}</p>
+               <div className="acoes-imovel">
+                    <button 
+                         className="btn-favoritar"
+                         onClick={() => adicionarFavorito(imovel)}
+                    >
+                         ⭐ Favoritar
+                    </button>
+                    <button 
+                         className="btn-detalhes"
+                         onClick={() => window.location.href = `/moradia/${imovel.idMovel}`}
+                    >
+                         🔍 Ver Detalhes
+                    </button>
+               </div>
+          </div>
      ))}
-
 </div>
 
 

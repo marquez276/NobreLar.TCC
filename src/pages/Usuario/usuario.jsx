@@ -3,61 +3,71 @@
 //npm run dev
 
 import axios from "axios";
+import api from "../../services/api";
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";//aqui
+import { useNavigate } from "react-router-dom";
 import './usuario.css'
 
 
 const Usuario = () => {
   const [, setUsuario] = useState([]);
 
+  const navigate = useNavigate();
+
   // Estados para os campos do formulário
   const [vnome, setNome] = useState('');
   const [vemail, setEmail] = useState('');
   const [vsenha, setSenha] = useState('');
+  const [vtelefone, setTelefone] = useState('');
+  const [vcpf, setCpf] = useState('');
+  const [vdataNascimento, setDataNascimento] = useState('');
   const [vstatus, setStatus] = useState('Ativo');
   const [vimagem, setImagem] = useState('');
   const [message, setMessage] = useState('');
 
-  // Carrega os usuários existentes (opcional)
-  useEffect(() => {
-    axios.get("http://localhost:3001/usuario")
-      .then((response) => {
-        setUsuario(response.data);
-        console.log(response.data);
-      })
-      .catch(err => {
-        console.error("Erro ao buscar os dados:", err);
-        // Não bloqueia a renderização se houver erro na API
-      });
-  }, []);
+
 
   // Função para cadastrar usuário
   const handleUsuario = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post("http://localhost:3001/usuario", {
+      const response = await api.post("/usuarios", {
         nome: vnome,
         email: vemail,
         senha: vsenha,
+        telefone: vtelefone,
+        cpf: vcpf,
+        dataNascimento: vdataNascimento,
         status: vstatus,
         foto: vimagem
       });
 
-      setMessage(" Cadastro realizado com sucesso!");
+      setMessage("Cadastro realizado com sucesso!");
       console.log("Usuário cadastrado:", response.data);
 
+      // Redireciona para login após cadastro
+      setTimeout(() => {
+        navigate('/login');
+      }, 2000);
+
       // Limpa os campos
-      setNome('');
-      setEmail('');
-      setSenha('');
-      setStatus('Ativo');
-      setImagem('');
+      resetForm();
     } catch (error) {
       console.error("Erro ao cadastrar o usuário", error);
-      setMessage(" Erro ao cadastrar o usuário.");
+      setMessage("Erro ao cadastrar o usuário.");
     }
+  };
+
+  const resetForm = () => {
+    setNome('');
+    setEmail('');
+    setSenha('');
+    setTelefone('');
+    setCpf('');
+    setDataNascimento('');
+    setStatus('Ativo');
+    setImagem('');
   };
 
 
@@ -92,7 +102,30 @@ const Usuario = () => {
         </div>
 
         <div className="form-group">
-                         <label>Imagem do Produto</label>
+          <label>Telefone</label>
+          <input
+            type="text"
+            placeholder="(11) 99999-9999" value={vtelefone} onChange={(e) => setTelefone(e.target.value)}
+          />
+        </div>
+
+        <div className="form-group">
+          <label>CPF</label>
+          <input
+            type="text"
+            placeholder="000.000.000-00" value={vcpf} onChange={(e) => setCpf(e.target.value)}
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Data de Nascimento</label>
+          <input
+            type="date" value={vdataNascimento} onChange={(e) => setDataNascimento(e.target.value)}
+          />
+        </div>
+
+        <div className="form-group">
+                         <label>Foto de Perfil</label>
                          <input
                               type="file"
                               accept="image/*"

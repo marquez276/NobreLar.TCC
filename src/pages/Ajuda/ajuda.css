@@ -100,21 +100,118 @@
   color: #000;
 }
 
-/* Responsivo */
+/* =============================================
+   RESPONSIVIDADE COMPLETA
+   ============================================= */
+
 @media (max-width: 768px) {
   .ajuda-container {
     padding: 15px;
+  }
+  
+  .ajuda-header {
+    padding: 20px;
+    margin-bottom: 30px;
   }
   
   .ajuda-header h1 {
     font-size: 28px;
   }
   
+  .ajuda-header p {
+    font-size: 16px;
+  }
+  
+  .ajuda-content {
+    gap: 30px;
+  }
+  
   .ajuda-section {
     padding: 20px;
   }
   
+  .ajuda-section h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
   .ajuda-card {
     padding: 20px;
+    margin-bottom: 15px;
+  }
+  
+  .ajuda-card h3 {
+    font-size: 18px;
+  }
+  
+  .ajuda-card p {
+    font-size: 14px;
+  }
+  
+  .contato-card p {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .ajuda-container {
+    padding: 10px;
+  }
+  
+  .ajuda-header {
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 15px;
+  }
+  
+  .ajuda-header h1 {
+    font-size: 24px;
+    margin-bottom: 8px;
+  }
+  
+  .ajuda-header p {
+    font-size: 14px;
+  }
+  
+  .ajuda-content {
+    gap: 20px;
+  }
+  
+  .ajuda-section {
+    padding: 15px;
+    border-radius: 15px;
+  }
+  
+  .ajuda-section h2 {
+    font-size: 20px;
+    margin-bottom: 15px;
+  }
+  
+  .ajuda-card {
+    padding: 15px;
+    margin-bottom: 12px;
+    border-radius: 10px;
+  }
+  
+  .ajuda-card h3 {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  
+  .ajuda-card p {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  
+  .contato-card {
+    padding: 20px;
+  }
+  
+  .contato-card h3 {
+    font-size: 20px;
+  }
+  
+  .contato-card p {
+    font-size: 14px;
   }
 }

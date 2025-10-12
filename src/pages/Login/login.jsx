@@ -10,7 +10,8 @@
 
 
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";//aqui
+import { useNavigate } from "react-router-dom";
+import api from '../../services/api';
 import './login.css'
 import { useAuth } from '../../context/AuthContext'
 
@@ -25,19 +26,18 @@ const Login = () => {
         e.preventDefault();
 
         try {
-            const response = await fetch(`http://localhost:3001/usuario?email=${email}&senha=${senha}`);
-            const data = await response.json();
+            const response = await api.post('/usuarios/login', {
+                email: email,
+                senha: senha
+            });
 
-            if (data.length > 0) {
-                const userData = data[0]
-                login(userData)
-                setMessage("Login realizado com sucesso!");
-                navigate("/home");
-            } else {
-                setMessage("Email ou senha inválidos.");
-            }
+            const userData = response.data;
+            login(userData);
+            setMessage("Login realizado com sucesso!");
+            navigate("/home");
         } catch (error) {
-            setMessage("Erro ao conectar com o servidor.")
+            console.error('Erro no login:', error);
+            setMessage("Email ou senha inválidos.");
         }
     };
     return (

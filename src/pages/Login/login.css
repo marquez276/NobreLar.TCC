@@ -76,3 +76,72 @@ button:hover {
   color: #495057;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+
+/* =============================================
+   RESPONSIVIDADE
+   ============================================= */
+
+@media (max-width: 768px) {
+  .app-container {
+    padding: 30px 20px;
+    margin: 5vh auto;
+    max-width: 90%;
+  }
+  
+  .main-content {
+    font-size: 24px;
+    margin-bottom: 25px;
+  }
+  
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="tel"] {
+    padding: 12px;
+    font-size: 14px;
+  }
+  
+  .form-group button {
+    padding: 12px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .app-container {
+    padding: 20px 15px;
+    margin: 3vh 10px;
+    border-radius: 15px;
+  }
+  
+  .main-content {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .form-group {
+    margin-bottom: 12px;
+  }
+  
+  label {
+    font-size: 14px;
+  }
+  
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="tel"] {
+    padding: 14px;
+    font-size: 16px;
+  }
+  
+  .form-group button {
+    padding: 14px;
+    font-size: 16px;
+  }
+  
+  .register-link {
+    margin-top: 15px;
+    font-size: 14px;
+  }
+}

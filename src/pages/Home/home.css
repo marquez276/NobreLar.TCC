@@ -54,21 +54,108 @@
   padding: 20px 0;
 }
 
+/* Responsividade melhorada */
 @media (max-width: 1400px) {
   .cards-container {
     grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
   }
 }
 
 @media (max-width: 1000px) {
   .cards-container {
     grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+  
+  .app-container {
+    padding: 30px 20px;
+    margin: 20px auto;
+  }
+  
+  .main-content {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 768px) {
+  .cards-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  
+  .produto-card {
+    padding: 15px;
+  }
+  
+  .produto-card h3 {
+    font-size: 18px;
+  }
+  
+  .produto-card p {
+    font-size: 14px;
+  }
+  
+  .btn-favoritar,
+  .btn-detalhes {
+    padding: 8px 15px;
+    font-size: 12px;
   }
 }
 
 @media (max-width: 600px) {
   .cards-container {
     grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  .app-container {
+    padding: 20px 15px;
+    margin: 15px auto;
+  }
+  
+  .main-content {
+    font-size: 24px;
+    margin-bottom: 30px;
+  }
+  
+  .produto-card {
+    padding: 20px;
+  }
+  
+  .acoes-imovel {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .btn-favoritar,
+  .btn-detalhes {
+    width: 100%;
+    padding: 12px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .app-container {
+    padding: 15px 10px;
+    margin: 10px;
+  }
+  
+  .main-content {
+    font-size: 20px;
+  }
+  
+  .produto-imagem {
+    height: 180px;
+  }
+  
+  .produto-card h3 {
+    font-size: 16px;
+  }
+  
+  .produto-card p {
+    font-size: 13px;
   }
 }
 
@@ -159,6 +246,51 @@
   font-weight: 600;
   text-align: center;
   font-size: 14px;
+}
+
+.acoes-imovel {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+  justify-content: center;
+}
+
+.btn-favoritar {
+  background: #ffc107;
+  color: #212529;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255, 193, 7, 0.3);
+}
+
+.btn-favoritar:hover {
+  background: #e0a800;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 193, 7, 0.4);
+}
+
+.btn-detalhes {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+}
+
+.btn-detalhes:hover {
+  background: #0056b3;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
 }
 
 /* Background da página */

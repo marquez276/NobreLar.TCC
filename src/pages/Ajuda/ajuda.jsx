@@ -10,27 +10,36 @@ function Ajuda() {
 
             <div className="ajuda-content">
                 <div className="ajuda-section">
-                    <h2>🏠 Como usar nosso site</h2>
+                    <h2>🏠 Como usar o Sistema NobleLar</h2>
                     <div className="ajuda-card">
-                        <h3>1. Navegando pelas moradias</h3>
-                        <p>• Acesse a página <strong>Home</strong> para ver todas as moradias disponíveis</p>
-                        <p>• Clique em qualquer moradia para ver detalhes completos</p>
-                        <p>• Use os filtros para encontrar o que procura</p>
+                        <h3>1. Visualizando Imóveis</h3>
+                        <p>• Acesse a página <strong>Home</strong> para ver todos os imóveis disponíveis</p>
+                        <p>• Veja fotos, preços, localização e detalhes completos</p>
+                        <p>• Informações do proprietário estão disponíveis para contato</p>
                     </div>
                     
                     <div className="ajuda-card">
-                        <h3>2. Cadastrando sua moradia</h3>
-                        <p>• Vá para a página <strong>Moradia</strong></p>
-                        <p>• Preencha todos os dados solicitados</p>
-                        <p>• Adicione fotos de qualidade</p>
-                        <p>• Escolha entre Venda ou Aluguel</p>
+                        <h3>2. Cadastrando Imóveis</h3>
+                        <p>• Vá para a página <strong>Moradia/Imóveis</strong></p>
+                        <p>• Preencha: nome, cidade, bairro, rua, descrição</p>
+                        <p>• Adicione valor, tipo de negócio (Venda/Aluguel)</p>
+                        <p>• Inclua dados do proprietário e fotos</p>
+                        <p>• <strong>Necessário fazer login</strong> para cadastrar</p>
                     </div>
 
                     <div className="ajuda-card">
-                        <h3>3. Gerenciando seu perfil</h3>
-                        <p>• Acesse <strong>Perfil</strong> para ver suas informações</p>
-                        <p>• Mantenha seus dados sempre atualizados</p>
-                        <p>• Adicione uma foto de perfil</p>
+                        <h3>3. Gerenciando Corretores</h3>
+                        <p>• Acesse <strong>Corretores</strong> para cadastrar profissionais</p>
+                        <p>• Registre nome, telefone, email e CREA</p>
+                        <p>• Edite ou remova corretores conforme necessário</p>
+                    </div>
+
+                    <div className="ajuda-card">
+                        <h3>4. Registrando Locações</h3>
+                        <p>• Use <strong>Locações</strong> para registrar vendas/aluguéis</p>
+                        <p>• Vincule cliente ao imóvel negociado</p>
+                        <p>• Registre data e tipo da transação</p>
+                        <p>• Mantenha histórico de negociações</p>
                     </div>
                 </div>
 
@@ -88,13 +97,24 @@ function Ajuda() {
                 </div>
 
                 <div className="ajuda-section">
+                    <h2>⚙️ Configuração do Sistema</h2>
+                    <div className="ajuda-card">
+                        <h3>Backend (Spring Boot)</h3>
+                        <p>• <strong>Porta:</strong> 8080</p>
+                        <p>• <strong>Banco:</strong> SQL Server (porta 1433)</p>
+                        <p>• <strong>APIs:</strong> /api/imoveis, /api/corretores, /api/locacoes, /api/usuarios</p>
+                    </div>
+
+                </div>
+
+                <div className="ajuda-section">
                     <h2>📞 Precisa de mais ajuda?</h2>
                     <div className="ajuda-card contato-card">
-                        <h3>Entre em contato conosco</h3>
-                        <p>📧 <strong>Email:</strong> ajuda@noblelar.com.br</p>
+                        <h3>Suporte Técnico</h3>
+                        <p>📧 <strong>Email:</strong> suporte@noblelar.com.br</p>
                         <p>📱 <strong>WhatsApp:</strong> (11) 99999-9999</p>
                         <p>🕒 <strong>Horário:</strong> Segunda a Sexta, 8h às 18h</p>
-                        <p>📍 <strong>Endereço:</strong> Rua das Casas, 123 - São Paulo/SP</p>
+                        <p>💻 <strong>Sistema:</strong> Versão 2.0 - Integração Backend/Frontend</p>
                     </div>
                 </div>
             </div>

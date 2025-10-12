@@ -32,6 +32,23 @@
   transform: scale(1.05);
 }
 
+.btn-adicionar-favorito {
+  background: #ffc107;
+  color: #212529;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 15px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-adicionar-favorito:hover {
+  background: #e0a800;
+  transform: scale(1.05);
+}
+
 .sem-login {
   text-align: center;
   padding: 40px 20px;
@@ -46,4 +63,60 @@
   line-height: 1.6;
   margin: 0;
   font-weight: 500;
+}
+
+/* =============================================
+   RESPONSIVIDADE
+   ============================================= */
+
+@media (max-width: 768px) {
+  .sem-favoritos,
+  .sem-login {
+    padding: 30px 15px;
+    margin: 15px;
+    font-size: 16px;
+  }
+  
+  .sem-favoritos p,
+  .sem-login p {
+    font-size: 16px;
+  }
+  
+  .acoes-favorito {
+    justify-content: center;
+    margin-top: 10px;
+  }
+  
+  .btn-remover-favorito,
+  .btn-adicionar-favorito {
+    padding: 10px 15px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .sem-favoritos,
+  .sem-login {
+    padding: 20px 10px;
+    margin: 10px;
+    border-radius: 8px;
+  }
+  
+  .sem-favoritos p,
+  .sem-login p {
+    font-size: 14px;
+  }
+  
+  .acoes-favorito {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .btn-remover-favorito,
+  .btn-adicionar-favorito {
+    width: 100%;
+    padding: 12px;
+    font-size: 14px;
+    border-radius: 8px;
+  }
 }

@@ -19,7 +19,15 @@ function Header() {
 
                     <span className='separador'>|</span>
 
-                    <a href="/moradia" className="abas">Moradia</a>
+                    <a href="/imovel" className="abas">Imóveis</a>
+
+                    <span className='separador'>|</span>
+
+                    <a href="/corretor" className="abas">Corretores</a>
+
+                    <span className='separador'>|</span>
+
+                    <a href="/locacao" className="abas">Locações</a>
 
                     <span className='separador'>|</span>
 
