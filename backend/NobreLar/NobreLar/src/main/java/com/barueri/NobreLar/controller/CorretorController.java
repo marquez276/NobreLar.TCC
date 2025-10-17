@@ -21,7 +21,7 @@ public class CorretorController {
     }
     
     @GetMapping("/{id}")
-    public Corretor buscarPorId(@PathVariable Integer id) {
+    public Corretor buscarPorId(@PathVariable Long id) {
         return corretorRepository.findById(id).orElse(null);
     }
     
@@ -31,13 +31,13 @@ public class CorretorController {
     }
     
     @PutMapping("/{id}")
-    public Corretor atualizar(@PathVariable Integer id, @RequestBody Corretor corretor) {
+    public Corretor atualizar(@PathVariable Long id, @RequestBody Corretor corretor) {
         corretor.setIdCorretor(id);
         return corretorRepository.save(corretor);
     }
     
     @DeleteMapping("/{id}")
-    public void deletar(@PathVariable Integer id) {
+    public void deletar(@PathVariable Long id) {
         corretorRepository.deleteById(id);
     }
 }

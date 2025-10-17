@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import React from "react";
 import api from "../../services/api";
-import './locacao.css'
+import { formatPhone, formatCPFCNPJ, removePhoneFormat, removeCPFCNPJFormat } from '../../utils/formatters';
 
 const Locacao = () => {
   const [locacoes, setLocacoes] = useState([]);
@@ -32,25 +32,36 @@ const Locacao = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Converter data para formato numérico (YYYYMMDD)
+    const dataFormatada = vdataTransacao.replace(/-/g, '');
+
+    // Verificar se é um imóvel cadastrado (número) ou tipo (string)
+    const imovelId = isNaN(Number(vfkImovelId)) ? null : Number(vfkImovelId);
+
     const dataToSend = {
-      idCompraAluga: parseInt(vidCompraAluga),
-      idCliente: parseInt(vidCliente),
-      dataTransacao: parseInt(vdataTransacao),
+      idCompraAluga: Number(vidCompraAluga),
+      idCliente: Number(vidCliente),
+      dataTransacao: Number(dataFormatada),
       tipoTransacao: vtipoTransacao,
       nome: vnome,
       email: vemail,
-      telefone: parseInt(vtelefone),
-      cpfCnpj: parseInt(vcpfCnpj),
-      fkImovelIdMovel: parseInt(vfkImovelId)
+      telefone: removePhoneFormat(vtelefone),
+      cpfCnpj: removeCPFCNPJFormat(vcpfCnpj),
+      fkImovelIdMovel: imovelId || 1
     };
+
+    console.log('Dados enviados:', dataToSend); // Para debug
 
     try {
       await api.post("/locacoes", dataToSend);
       const res = await api.get("/locacoes");
       setLocacoes(res.data);
       resetForm();
+      alert('Locação cadastrada com sucesso!');
     } catch (err) {
-      console.error(err);
+      console.error('Erro ao cadastrar locação:', err);
+      console.error('Resposta do servidor:', err.response?.data);
+      alert(`Erro ao cadastrar locação: ${err.response?.data?.message || 'Verifique os dados.'}`); 
     }
   };
 
@@ -94,7 +105,7 @@ const Locacao = () => {
 
           <div className="form-group">
             <label>Data Transação</label>
-            <input type="number" value={vdataTransacao} required onChange={(e) => setDataTransacao(e.target.value)} />
+            <input type="date" value={vdataTransacao} required onChange={(e) => setDataTransacao(e.target.value)} />
           </div>
 
           <div className="form-group">
@@ -117,23 +128,55 @@ const Locacao = () => {
 
           <div className="form-group">
             <label>Telefone</label>
-            <input type="number" value={vtelefone} required onChange={(e) => setTelefone(e.target.value)} />
+            <input 
+              type="tel" 
+              value={vtelefone} 
+              placeholder="(11) 99999-9999" 
+              required 
+              onChange={(e) => setTelefone(formatPhone(e.target.value))} 
+            />
           </div>
 
           <div className="form-group">
             <label>CPF/CNPJ</label>
-            <input type="number" value={vcpfCnpj} required onChange={(e) => setCpfCnpj(e.target.value)} />
+            <input 
+              type="text" 
+              value={vcpfCnpj} 
+              placeholder="000.000.000-00 ou 00.000.000/0000-00" 
+              required 
+              onChange={(e) => setCpfCnpj(formatCPFCNPJ(e.target.value))} 
+            />
           </div>
 
           <div className="form-group">
             <label>Imóvel</label>
             <select value={vfkImovelId} required onChange={(e) => setFkImovelId(e.target.value)}>
-              <option value="">Selecione o imóvel</option>
-              {imoveis.map(imovel => (
-                <option key={imovel.idMovel} value={imovel.idMovel}>
-                  {imovel.tipo} - {imovel.endereco} - R$ {imovel.valor}
-                </option>
-              ))}
+              <option value="">Selecione um imóvel</option>
+              
+              {/* Opções de tipos de imóveis principais - usando IDs fictícios */}
+              <optgroup label="Tipos de Imóveis">
+                <option value="101">🏠 Casa</option>
+                <option value="102">🏢 Apartamento</option>
+                <option value="103">🏙️ Cobertura</option>
+                <option value="104">🏘️ Duplex</option>
+                <option value="105">🏗️ Triplex</option>
+                <option value="106">🏠 Studio</option>
+                <option value="107">🏭 Loft</option>
+                <option value="108">🏨 Flat</option>
+                <option value="109">🏪 Comercial</option>
+                <option value="110">🌱 Terreno</option>
+              </optgroup>
+              
+              {/* Imóveis cadastrados no sistema */}
+              {imoveis.length > 0 && (
+                <optgroup label="Imóveis Cadastrados">
+                  {imoveis.map(imovel => (
+                    <option key={imovel.idMovel} value={imovel.idMovel}>
+                      {imovel.nome || imovel.tipo} - {imovel.cidade} - R$ {imovel.valor}
+                    </option>
+                  ))}
+                </optgroup>
+              )}
             </select>
           </div>
 
@@ -145,16 +188,25 @@ const Locacao = () => {
 
       <div className="app-container">
         <div className="main-content">Locações Cadastradas</div>
-        <ul>
+        <div className="cards-container">
           {locacoes.map(locacao => (
-            <li key={`${locacao.idCompraAluga}-${locacao.idCliente}`}>
-              {locacao.nome} - {locacao.email} - {locacao.tipoTransacao} - Data: {locacao.dataTransacao}
-              <div>
-                <button onClick={() => handleDelete(locacao.idCompraAluga, locacao.idCliente)}>Deletar</button>
+            <div key={`${locacao.idCompraAluga}-${locacao.idCliente}`} className="locacao-card">
+              <h3>{locacao.nome}</h3>
+              <p><strong>Email:</strong> {locacao.email}</p>
+              <p><strong>Tipo:</strong> {locacao.tipoTransacao}</p>
+              <p><strong>Data:</strong> {locacao.dataTransacao}</p>
+              <p><strong>Telefone:</strong> {locacao.telefone}</p>
+              <div className="acoes-locacao">
+                <button 
+                  className="btn-deletar"
+                  onClick={() => handleDelete(locacao.idCompraAluga, locacao.idCliente)}
+                >
+                  🗑️ Deletar
+                </button>
               </div>
-            </li>
+            </div>
           ))}
-        </ul>
+        </div>
       </div>
     </div>
   );

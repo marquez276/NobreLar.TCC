@@ -10,14 +10,14 @@ import lombok.Data;
 public class LocacaoCliente {
     @Id
     @Column(name = "ID_Compra_Aluga")
-    private Integer idCompraAluga;
+    private Long idCompraAluga;
     
     @Id
     @Column(name = "ID_Cliente")
-    private Integer idCliente;
+    private Long idCliente;
     
     @Column(name = "Data_Transacao")
-    private Integer dataTransacao;
+    private Long dataTransacao;
     
     @Column(name = "Tipo_Transacao", length = 20)
     private String tipoTransacao;
@@ -29,11 +29,11 @@ public class LocacaoCliente {
     private String email;
     
     @Column(name = "Telefone")
-    private Integer telefone;
+    private String telefone;
     
     @Column(name = "CPF_CNPJ")
-    private Integer cpfCnpj;
+    private String cpfCnpj;
     
     @Column(name = "fk_Imóvel_3_ID_Movel")
-    private Integer fkImovelIdMovel;
+    private Long fkImovelIdMovel;
 }

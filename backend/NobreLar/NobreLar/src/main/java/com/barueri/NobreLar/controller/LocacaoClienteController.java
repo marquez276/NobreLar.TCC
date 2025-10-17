@@ -27,7 +27,7 @@ public class LocacaoClienteController {
     }
     
     @DeleteMapping("/{idCompra}/{idCliente}")
-    public void deletar(@PathVariable Integer idCompra, @PathVariable Integer idCliente) {
+    public void deletar(@PathVariable Long idCompra, @PathVariable Long idCliente) {
         LocacaoClienteId id = new LocacaoClienteId();
         id.setIdCompraAluga(idCompra);
         id.setIdCliente(idCliente);

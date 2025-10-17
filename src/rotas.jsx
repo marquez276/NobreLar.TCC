@@ -9,6 +9,7 @@ import MoradiaDetalhes from "./pages/MoradiaDetalhes/moradiaDetalhes";
 import Ajuda from "./pages/Ajuda/ajuda";
 import Favoritos from "./pages/Favoritos/favoritos";
 import Corretor from "./pages/Corretor/corretor";
+import CorretoresView from "./pages/CorretoresView/CorretoresView";
 import Locacao from "./pages/Locacao/locacao";
 import Imovel from "./pages/Imovel/imovel";
 import { AuthProvider } from './context/AuthContext';
@@ -29,6 +30,7 @@ function RoutesApp() {
                         <Route path="/moradia/:id" element={<MoradiaDetalhes />} />
                         <Route path="/imovel" element={<Imovel />} />
                         <Route path="/corretor" element={<Corretor />} />
+                        <Route path="/corretores" element={<CorretoresView />} />
                         <Route path="/locacao" element={<Locacao />} />
                         <Route path="/favoritos" element={<Favoritos />} />
                         <Route path="/usuario_layout" element={<UsuarioLayout />} />

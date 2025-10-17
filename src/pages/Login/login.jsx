@@ -12,7 +12,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import api from '../../services/api';
-import './login.css'
 import { useAuth } from '../../context/AuthContext'
 
 const Login = () => {

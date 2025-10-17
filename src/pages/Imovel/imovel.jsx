@@ -3,7 +3,7 @@ import React from "react";
 import api from "../../services/api";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from '../../context/AuthContext';
-import './imovel.css'
+import { formatCurrency, formatPhone, removeCurrencyFormat, removePhoneFormat } from '../../utils/formatters';
 
 const Imovel = () => {
   const { isAuthenticated } = useAuth()
@@ -44,7 +44,7 @@ const Imovel = () => {
 
     const dataToSend = {
       numeroDeCotas: 1,
-      valor: parseInt(vvalor),
+      valor: removeCurrencyFormat(vvalor),
       tipo: vtipo,
       endereco: vendereco,
       nome: vnome,
@@ -53,7 +53,7 @@ const Imovel = () => {
       bairro: vbairro,
       rua: vrua,
       numero: vnumero,
-      telefone: vtelefone,
+      telefone: removePhoneFormat(vtelefone),
       nomeProprietario: vnomeProprietario,
       tipoNegocio: vtipoNegocio,
       imagem: vimagem
@@ -127,10 +127,7 @@ const Imovel = () => {
       </div>
 
       <form onSubmit={handleSubmit}>
-        <div className='form-group'>
-          <label>Nome do Imóvel</label>
-          <input type="text" value={vnome} required onChange={(e) => setNome(e.target.value)} />
-        </div>
+
 
         <div className='form-group'>
           <label>Cidade</label>
@@ -149,7 +146,7 @@ const Imovel = () => {
 
         <div className='form-group'>
           <label>Número</label>
-          <input type="text" value={vnumero} onChange={(e) => setNumero(e.target.value)} />
+          <input type="text" value={vnumero} placeholder="Número da sua casa" onChange={(e) => setNumero(e.target.value)} />
         </div>
 
         <div className='form-group'>
@@ -159,7 +156,13 @@ const Imovel = () => {
 
         <div className='form-group'>
           <label>Valor</label>
-          <input type="number" value={vvalor} required onChange={(e) => setValor(e.target.value)} />
+          <input 
+            type="text" 
+            value={vvalor} 
+            placeholder="R$ 0,00"
+            required 
+            onChange={(e) => setValor(formatCurrency(e.target.value))} 
+          />
         </div>
 
         <div className='form-group'>
@@ -172,12 +175,30 @@ const Imovel = () => {
 
         <div className='form-group'>
           <label>Tipo do Imóvel</label>
-          <input type="text" value={vtipo} placeholder="Casa, Apartamento, etc." required onChange={(e) => setTipo(e.target.value)} />
+          <select value={vtipo} required onChange={(e) => setTipo(e.target.value)}>
+            <option value="">Selecione o tipo</option>
+            <option value="Casa">🏠 Casa</option>
+            <option value="Apartamento">🏢 Apartamento</option>
+            <option value="Cobertura">🏙️ Cobertura</option>
+            <option value="Duplex">🏘️ Duplex</option>
+            <option value="Triplex">🏗️ Triplex</option>
+            <option value="Studio">🏠 Studio</option>
+            <option value="Loft">🏭 Loft</option>
+            <option value="Flat">🏨 Flat</option>
+            <option value="Comercial">🏪 Comercial</option>
+            <option value="Terreno">🌱 Terreno</option>
+          </select>
         </div>
 
         <div className='form-group'>
           <label>Telefone do Proprietário</label>
-          <input type="text" value={vtelefone} required onChange={(e) => setTelefone(e.target.value)} />
+          <input 
+            type="tel" 
+            value={vtelefone}
+            placeholder="(11) 99999-9999"
+            required 
+            onChange={(e) => setTelefone(formatPhone(e.target.value))} 
+          />
         </div>
 
         <div className='form-group'>

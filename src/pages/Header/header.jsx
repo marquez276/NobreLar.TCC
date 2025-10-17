@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom'
-import Logo from '../img/Logo.png'
-import './header.css'
+import Logo from '../img/Logo.jpg'
 import { useState, useEffect } from 'react'
 import api from 'axios'
 import { useAuth } from '../../context/AuthContext'
@@ -8,34 +7,23 @@ import { useAuth } from '../../context/AuthContext'
 function Header() {
     const { user, isAuthenticated, logout } = useAuth()
     const [showDropdown, setShowDropdown] = useState(false)
+    const [showAdminMenu, setShowAdminMenu] = useState(false)
 
     return (
         <header>
             <div>
-                <img src={Logo} alt="Logo" title="Erradicação da pobreza" />
+                <img src={Logo} alt="Logo" title="Erradicação da pobreza" className="logo" />
                 <nav>
 
                     <a href="/home" className="abas">Home</a>
 
                     <span className='separador'>|</span>
 
-                    <a href="/imovel" className="abas">Imóveis</a>
+                    <a href="/corretores" className="abas">Corretores</a>
 
                     <span className='separador'>|</span>
 
-                    <a href="/corretor" className="abas">Corretores</a>
-
-                    <span className='separador'>|</span>
-
-                    <a href="/locacao" className="abas">Locações</a>
-
-                    <span className='separador'>|</span>
-
-                    <a href="/favoritos" className="abas">Favoritos</a>
-
-                    <span className='separador'>|</span>
-
-                    <a href="/usuario_layout" className="abas">Perfil</a>
+                   <a href="/favoritos" className="abas">Favoritos</a>
 
                     <span className='separador'>|</span>
 
@@ -43,7 +31,33 @@ function Header() {
 
                 </nav>
                 
-                <div className="user-profile">
+                <div className="header-actions">
+                    <div 
+                        className="admin-menu-container"
+                        onClick={() => setShowAdminMenu(!showAdminMenu)}
+                    >
+                        <div className="hamburger-icon">☰</div>
+                        
+                        {showAdminMenu && (
+                            <div className="dropdown-menu admin-dropdown">
+                                <Link to="/imovel" className="dropdown-item">
+                                    🏠 Imóveis
+                                </Link>
+                                {isAuthenticated && (
+                                    <>
+                                        <Link to="/corretor" className="dropdown-item">
+                                            👥 Profissionais
+                                        </Link>
+                                        <Link to="/locacao" className="dropdown-item">
+                                            💼 Transações
+                                        </Link>
+                                    </>
+                                )}
+                            </div>
+                        )}
+                    </div>
+                    
+                    <div className="user-profile">
                     <div 
                         className="profile-container"
                         onClick={() => setShowDropdown(!showDropdown)}
@@ -62,6 +76,9 @@ function Header() {
                             <div className="dropdown-menu">
                                 {isAuthenticated ? (
                                     <>
+                                        <Link to="/usuario_layout" className="dropdown-item">
+                                            👤 Perfil
+                                        </Link>
                                         <span className="user-name">{user?.nome}</span>
                                         <button onClick={logout} className="dropdown-item">
                                             Sair da conta
@@ -80,6 +97,7 @@ function Header() {
                             </div>
                         )}
                     </div>
+                </div>
                 </div>
             </div>
         </header>

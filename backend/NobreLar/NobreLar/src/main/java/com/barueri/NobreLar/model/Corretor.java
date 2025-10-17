@@ -8,18 +8,19 @@ import lombok.Data;
 @Table(name = "Corretor")
 public class Corretor {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_Corretor")
-    private Integer idCorretor;
+    private Long idCorretor;
     
-    @Column(name = "Nome", length = 20)
+    @Column(name = "Nome", length = 100)
     private String nome;
     
     @Column(name = "Telefone")
-    private Integer telefone;
+    private String telefone;
     
     @Column(name = "Email", length = 100)
     private String email;
     
-    @Column(name = "Registro_CREA")
-    private Integer registroCrea;
+    @Column(name = "Registro_CRECI")
+    private String registroCreci;
 }

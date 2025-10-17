@@ -1,7 +1,6 @@
 import { useParams, useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import api from '../../services/api'
-import './moradiaDetalhes.css'
 import { useAuth } from '../../context/AuthContext'
 
 function MoradiaDetalhes() {
@@ -62,70 +61,63 @@ function MoradiaDetalhes() {
     }
 
     if (!imovel) {
-        return <div className="loading">Carregando...</div>
+        return (
+            <div className="app-container">
+                <div className="main-content">Carregando...</div>
+            </div>
+        )
     }
 
     return (
-        <div className="detalhes-container">
-            <button className="btn-voltar" onClick={() => navigate('/home')}>
+        <div className="app-container">
+            <div className="main-content">
+                🏠 Detalhes do Imóvel
+            </div>
+            
+            <button className="btn" onClick={() => navigate('/home')}>
                 ← Voltar
             </button>
             
-            <div className="moradia-detalhes">
-                <div className="imagem-container">
-                    {imovel.imagem && (
-                        <img src={imovel.imagem} alt={imovel.nome} className="imagem-principal" />
-                    )}
-                </div>
+            <div className="produto-card">
+                {imovel.imagem && (
+                    <img src={imovel.imagem} alt={imovel.nome} className="produto-imagem" />
+                )}
                 
-                <div className="info-container">
-                    <h1>{imovel.nome}</h1>
-                    <div className="preco-tipo">
-                        <span className="preco">R$ {imovel.valor}</span>
-                        <span className="tipo">{imovel.tipoNegocio || 'Venda'}</span>
-                    </div>
-                    
-                    <div className="localizacao">
-                        <h3>📍 Localização</h3>
-                        <p><strong>Cidade:</strong> {imovel.cidade}</p>
-                        <p><strong>Bairro:</strong> {imovel.bairro}</p>
-                        <p><strong>Rua:</strong> {imovel.rua}</p>
-                        <p><strong>Número:</strong> {imovel.numero}</p>
-                        <p><strong>Tipo:</strong> {imovel.tipo}</p>
-                    </div>
-                    
-                    <div className="descricao">
-                        <h3>📋 Descrição</h3>
-                        <p>{imovel.descricao}</p>
-                    </div>
-                    
-                    <div className="contato">
-                        <h3>📞 Contato</h3>
-                        <p><strong>Proprietário:</strong> {imovel.nomeProprietario}</p>
-                        <p><strong>Telefone:</strong> {imovel.telefone}</p>
-                    </div>
-                    
-                    <div className="acoes">
-                        <button 
-                            className="btn-contato"
-                            onClick={() => {
-                                if (!isAuthenticated) {
-                                    alert('Você precisa se cadastrar para entrar em contato!')
-                                    navigate('/usuario')
-                                } else {
-                                    alert(`Entre em contato com ${imovel.nomeProprietario} pelo telefone: ${imovel.telefone}`)
-                                }
-                            }}
-                        >
-                            Entrar em Contato
-                        </button>
-                        <button 
-                            className={`btn-favoritar ${isFavorito ? 'favorito-ativo' : ''}`}
-                            onClick={toggleFavorito}
-                        >
-                            {isFavorito ? '❤️ Favoritado' : '🤍 Favoritar'}
-                        </button>
-                    </div>
+                <h3>{imovel.nome}</h3>
+                <p>R$ {imovel.valor}</p>
+                <p><strong>Tipo:</strong> {imovel.tipoNegocio || 'Venda'}</p>
+                
+                <p><strong>Cidade:</strong> {imovel.cidade}</p>
+                <p><strong>Bairro:</strong> {imovel.bairro}</p>
+                <p><strong>Rua:</strong> {imovel.rua}</p>
+                <p><strong>Número:</strong> {imovel.numero}</p>
+                <p><strong>Tipo:</strong> {imovel.tipo}</p>
+                
+                <p><strong>Descrição:</strong> {imovel.descricao}</p>
+                
+                <p><strong>Proprietário:</strong> {imovel.nomeProprietario}</p>
+                <p><strong>Telefone:</strong> {imovel.telefone}</p>
+                
+                <div className="acoes-imovel">
+                    <button 
+                        className="btn"
+                        onClick={() => {
+                            if (!isAuthenticated) {
+                                alert('Você precisa se cadastrar para entrar em contato!')
+                                navigate('/usuario')
+                            } else {
+                                alert(`Entre em contato com ${imovel.nomeProprietario} pelo telefone: ${imovel.telefone}`)
+                            }
+                        }}
+                    >
+                        📞 Entrar em Contato
+                    </button>
+                    <button 
+                        className={`btn-favoritar ${isFavorito ? 'favorito-ativo' : ''}`}
+                        onClick={toggleFavorito}
+                    >
+                        {isFavorito ? '❤️ Favoritado' : '🤍 Favoritar'}
+                    </button>
                 </div>
             </div>
         </div>

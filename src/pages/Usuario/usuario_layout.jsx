@@ -2,7 +2,6 @@ import api from "axios";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from '../../context/AuthContext';
-import './usuario_layout.css'
 
 function UsuarioLayout() {
      const { user, isAuthenticated } = useAuth()

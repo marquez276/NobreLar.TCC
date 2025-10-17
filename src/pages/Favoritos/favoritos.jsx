@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import './favoritos.css'
 import { useAuth } from '../../context/AuthContext'
 import api from '../../services/api'
 
@@ -31,8 +30,9 @@ function Favoritos() {
 
     return (
         <div className='app-container'>
-            <div className="main-content">
-                Meus Favoritos
+            <div className="favoritos-header">
+                <h1>💖 Meus Favoritos</h1>
+                <p>Seus imóveis salvos estão aqui!</p>
             </div>
 
             {!isAuthenticated ? (
@@ -40,14 +40,14 @@ function Favoritos() {
                     <p>Você não está logado, caso não tem um login, aperte no ícone do boneco acima e cadastre-se</p>
                 </div>
             ) : favoritos.length === 0 ? (
-                <div className="sem-favoritos">
+                <div className="favoritos-empty">
                     <p>Você ainda não tem favoritos.</p>
                     <p>Navegue pelos imóveis na página Home e adicione aos favoritos!</p>
                 </div>
             ) : (
                 <div className="cards-container">
                     {favoritos.map((favorito) => (
-                        <div key={favorito.idFavorito} className="produto-card">
+                        <div key={favorito.idFavorito} className="favorito-card">
                             {favorito.imagemImovel && (
                                 <img src={favorito.imagemImovel} alt={favorito.nomeImovel} className="produto-imagem" />
                             )}
@@ -55,7 +55,13 @@ function Favoritos() {
                             <p>R$ {favorito.valorImovel}</p>
                             <p>{favorito.cidadeImovel}</p>
                             <p>Adicionado em: {favorito.dataAdicao}</p>
-                            <div className="acoes-favorito">
+                            <div className="favorito-actions">
+                                <button 
+                                    className="btn-ver-detalhes-favorito"
+                                    onClick={() => navigate(`/moradia/${favorito.idImovel}`)}
+                                >
+                                    👁️ Ver Detalhes
+                                </button>
                                 <button 
                                     className="btn-remover-favorito"
                                     onClick={() => removerFavorito(favorito.idFavorito)}

@@ -6,7 +6,6 @@ import axios from "axios";
 import api from "../../services/api";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import './usuario.css'
 
 
 const Usuario = () => {

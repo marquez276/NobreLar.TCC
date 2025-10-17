@@ -70,8 +70,8 @@ CREATE TABLE Locacao_Cliente (
     Tipo_Transacao NVARCHAR(20),
     Nome NVARCHAR(100),
     Email NVARCHAR(100),
-    Telefone INT,
-    CPF_CNPJ INT,
+    Telefone BIGINT,
+    CPF_CNPJ BIGINT,
     fk_Imóvel_3_ID_Movel INT,
     PRIMARY KEY (ID_Compra_Aluga, ID_Cliente),
     FOREIGN KEY (fk_Imóvel_3_ID_Movel) REFERENCES Imóvel(ID_Movel)
@@ -134,7 +134,7 @@ VALUES
 
 -- Inserir exemplo de locação
 INSERT INTO Locacao_Cliente (ID_Compra_Aluga, ID_Cliente, Data_Transacao, Tipo_Transacao, Nome, Email, Telefone, CPF_CNPJ, fk_Imóvel_3_ID_Movel)
-VALUES (1, 1, 20241201, 'Aluguel', 'João Silva', 'joao@teste.com', 11988888888, 12345678900, 2);
+VALUES (1, 1, 20241201, 'Aluguel', 'João Silva', 'joao@teste.com', 1198888888, 12345678900, 2);
 
 -- Inserir exemplo de favorito
 INSERT INTO Favorito (ID_Usuario, ID_Imovel, Data_Adicao, Nome_Imovel, Valor_Imovel, Cidade_Imovel)

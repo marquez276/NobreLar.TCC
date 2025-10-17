@@ -37,9 +37,12 @@ public class UsuarioController {
         String email = credentials.get("email");
         String senha = credentials.get("senha");
         
-        return usuarioRepository.findByEmailAndSenha(email, senha)
-            .map(usuario -> ResponseEntity.ok(usuario))
-            .orElse(ResponseEntity.badRequest().body("Credenciais inválidas"));
+        var usuario = usuarioRepository.findByEmailAndSenha(email, senha);
+        if (usuario.isPresent()) {
+            return ResponseEntity.ok(usuario.get());
+        } else {
+            return ResponseEntity.badRequest().body("Credenciais inválidas");
+        }
     }
     
     @PutMapping("/{id}")

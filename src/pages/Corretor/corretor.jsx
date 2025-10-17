@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import React from "react";
 import api from "../../services/api";
-import './corretor.css'
+import { formatPhone, removePhoneFormat } from '../../utils/formatters';
 
 const Corretor = () => {
   const [corretores, setCorretores] = useState([]);
@@ -9,7 +9,7 @@ const Corretor = () => {
   const [vnome, setNome] = useState("");
   const [vtelefone, setTelefone] = useState("");
   const [vemail, setEmail] = useState("");
-  const [vregistroCrea, setRegistroCrea] = useState("");
+  const [vregistroCreci, setRegistroCreci] = useState("");
 
   const [isEditing, setIsEditing] = useState(false);
   const [editingId, setEditingId] = useState(null);
@@ -25,9 +25,9 @@ const Corretor = () => {
 
     const dataToSend = {
       nome: vnome,
-      telefone: parseInt(vtelefone),
+      telefone: removePhoneFormat(vtelefone),
       email: vemail,
-      registroCrea: parseInt(vregistroCrea)
+      registroCreci: vregistroCreci.replace(/\D/g, '')
     };
 
     try {
@@ -51,7 +51,7 @@ const Corretor = () => {
     setNome(corretor.nome);
     setTelefone(corretor.telefone.toString());
     setEmail(corretor.email);
-    setRegistroCrea(corretor.registroCrea.toString());
+    setRegistroCreci(corretor.registroCreci.toString());
   };
 
   const handleDelete = async (id) => {
@@ -70,7 +70,7 @@ const Corretor = () => {
     setNome("");
     setTelefone("");
     setEmail("");
-    setRegistroCrea("");
+    setRegistroCreci("");
   };
 
   return (
@@ -86,7 +86,13 @@ const Corretor = () => {
 
           <div className="form-group">
             <label>Telefone</label>
-            <input type="number" value={vtelefone} required onChange={(e) => setTelefone(e.target.value)} />
+            <input 
+              type="tel" 
+              value={vtelefone} 
+              placeholder="(11) 99999-9999"
+              required 
+              onChange={(e) => setTelefone(formatPhone(e.target.value))} 
+            />
           </div>
 
           <div className="form-group">
@@ -95,8 +101,8 @@ const Corretor = () => {
           </div>
 
           <div className="form-group">
-            <label>Registro CREA</label>
-            <input type="number" value={vregistroCrea} required onChange={(e) => setRegistroCrea(e.target.value)} />
+            <label>Registro CRECI</label>
+            <input type="number" value={vregistroCreci} required onChange={(e) => setRegistroCreci(e.target.value)} />
           </div>
 
           <div className="form-group">
@@ -116,7 +122,7 @@ const Corretor = () => {
         <ul>
           {corretores.map(corretor => (
             <li key={corretor.idCorretor}>
-              {corretor.nome} - {corretor.email} - {corretor.telefone} - CREA: {corretor.registroCrea}
+              {corretor.nome} - {corretor.email} - {corretor.telefone} - CRECI: {corretor.registroCreci}
               <div>
                 <button onClick={() => handleEdit(corretor)}>Editar</button>
                 <button onClick={() => handleDelete(corretor.idCorretor)}>Deletar</button>

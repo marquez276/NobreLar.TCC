@@ -5,6 +5,6 @@ import java.io.Serializable;
 
 @Data
 public class LocacaoClienteId implements Serializable {
-    private Integer idCompraAluga;
-    private Integer idCliente;
+    private Long idCompraAluga;
+    private Long idCliente;
 }
