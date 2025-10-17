@@ -133,4 +133,4 @@ Projeto desenvolvido para fins acadêmicos.
 
 ---
 
-**Desenvolvido com ❤️ para o TCC**
+**Desenvolvido para o TCC - Sistema Imobiliário NobreLar**

@@ -127,4 +127,4 @@ spring.profiles.active=dev  # ou prod
 
 ---
 
-**✅ SISTEMA PRONTO PARA AMBOS OS BANCOS!**
+**SISTEMA CONFIGURADO PARA AMBOS OS BANCOS DE DADOS**
